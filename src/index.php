@@ -21,9 +21,9 @@ if(isset($_SESSION['sub'])) {
   echo '<p>Logged in as</p>';
   echo '<p> Name: ' . $_SESSION['name'] . '</p>';
   echo '<p> Username: ' . $_SESSION['username'] . '</p>';
-  echo '<p> Email' . $_SESSION['email'] . '</p>';
-  echo '<p> SUB' . $_SESSION['sub'] . '</p>';
-  echo '<p> Role' . $_SESSION['role'] . '</p>';
+  echo '<p> Email: ' . $_SESSION['email'] . '</p>';
+  echo '<p> SUB: ' . $_SESSION['sub'] . '</p>';
+  echo '<p> Role: ' . $_SESSION['role'] . '</p>';
   echo '<p><a href="/?logout">Log Out</a></p>';
   die();
 }
