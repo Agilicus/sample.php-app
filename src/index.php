@@ -3,7 +3,6 @@ session_start();
 
 $client_id = 'sample-php-app';
 $client_secret = 'NOTREALLYSECRET';
-// $redirect_uri = 'http://localhost:4200/';
 $redirect_uri = url_origin($_SERVER);
 $metadata_url = 'https://auth.cloud.egov.city/.well-known/openid-configuration';
 
@@ -13,16 +12,18 @@ if(isset($_GET['logout'])) {
   unset($_SESSION['name']);
   unset($_SESSION['email']);
   unset($_SESSION['sub']);
+  unset($_SESSION['role']);
   header('Location: /');
   die();
 }
 
 if(isset($_SESSION['sub'])) {
   echo '<p>Logged in as</p>';
-  echo '<p>' . $_SESSION['name'] . '</p>';
-  echo '<p>' . $_SESSION['username'] . '</p>';
-  echo '<p>' . $_SESSION['email'] . '</p>';
-  echo '<p>' . $_SESSION['sub'] . '</p>';
+  echo '<p> Name: ' . $_SESSION['name'] . '</p>';
+  echo '<p> Username: ' . $_SESSION['username'] . '</p>';
+  echo '<p> Email' . $_SESSION['email'] . '</p>';
+  echo '<p> SUB' . $_SESSION['sub'] . '</p>';
+  echo '<p> Role' . $_SESSION['role'] . '</p>';
   echo '<p><a href="/?logout">Log Out</a></p>';
   die();
 }
@@ -88,7 +89,7 @@ if(!isset($_GET['code'])) {
     $_SESSION['username'] = $userinfo->preferred_username;
     $_SESSION['email'] = $userinfo->email;
     $_SESSION['profile'] = $userinfo;
-#print("<pre>" . print_r($userinfo, true) . "</pre>");
+    $_SESSION['role'] = $userinfo->agilicus->roles->{"sample-php-app"}[0];
     header('Location: /');
     die();
   }
